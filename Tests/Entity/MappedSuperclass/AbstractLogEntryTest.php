@@ -24,8 +24,7 @@ class AbstractLogEntryTest extends TestCase
 
     public function testSetUser()
     {
-        $user = $this->getMockBuilder('Symfony\Component\Security\Core\User\UserInterface')
-            ->getMock();
+        $user = $this->createMock('Symfony\Component\Security\Core\User\UserInterface');
         $entity = $this->getEntityMock();
         $entity->setUser($user);
         $this->assertInstanceOf(
@@ -46,7 +45,7 @@ class AbstractLogEntryTest extends TestCase
      * @return MockObject|AbstractLogEntry
      */
     private function getEntityMock() {
-        return $this->getMock(
+        return $this->createMock(
             'ActivityLogBundle\Entity\MappedSuperclass\AbstractLogEntry'
         );
     }
