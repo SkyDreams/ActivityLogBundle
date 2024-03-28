@@ -1,5 +1,5 @@
 {
-    "name": "madmis/activity-log-bundle",
+    "name": "skydreams/activity-log-bundle",
     "type": "symfony-bundle",
     "description": "Activity log bundle - Extended doctrine loggable bundle",
     "keywords": ["bundle", "doctrine", "loggable", "activity", "symfony"],
