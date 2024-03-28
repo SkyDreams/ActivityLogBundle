@@ -2,13 +2,14 @@
 
 namespace Service\ActivityLog\EntityFormatter;
 
+use PHPUnit\Framework\TestCase;
 
-class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
+class AbstractFormatterTest extends TestCase
 {
 
     public function testNormalizeValue()
     {
-        $stub = $this->getMockForAbstractClass(
+        $stub = $this->createMock(
             'ActivityLogBundle\Service\ActivityLog\EntityFormatter\AbstractFormatter'
         );
 

@@ -3,8 +3,10 @@
 namespace Entity\MappedSuperclass;
 
 use ActivityLogBundle\Entity\MappedSuperclass\AbstractLogEntry;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class AbstractLogEntryTest extends \PHPUnit_Framework_TestCase
+class AbstractLogEntryTest extends TestCase
 {
     public function testSetParentId()
     {
@@ -41,10 +43,10 @@ class AbstractLogEntryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|AbstractLogEntry
+     * @return MockObject|AbstractLogEntry
      */
     private function getEntityMock() {
-        return $this->getMockForAbstractClass(
+        return $this->getMock(
             'ActivityLogBundle\Entity\MappedSuperclass\AbstractLogEntry'
         );
     }

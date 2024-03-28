@@ -6,13 +6,13 @@ namespace Service\ActivityLog;
 use ActivityLogBundle\Entity\LogEntry;
 use ActivityLogBundle\Service\ActivityLog\ActivityLogFormatter;
 use ActivityLogBundle\Service\ActivityLog\EntityFormatter\UniversalFormatter;
+use PHPUnit\Framework\TestCase;
 
-class ActivityLogFormatterTest extends \PHPUnit_Framework_TestCase
+class ActivityLogFormatterTest extends TestCase
 {
     public function testFormat()
     {
-        $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')
-            ->getMock();
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger->method('warning')
         ->willReturn($this->returnValue(null));
 
