@@ -6,8 +6,9 @@ use ActivityLogBundle\Entity\LogEntry;
 use ActivityLogBundle\Listener\LoggableListener;
 use ActivityLogBundle\Service\ActivityLog\EntityFormatter\UniversalFormatter;
 use Doctrine\ORM\EntityManager;
+use PHPUnit\Framework\TestCase;
 
-class UniversalFormatterTest extends \PHPUnit_Framework_TestCase
+class UniversalFormatterTest extends TestCase
 {
     public function testFormatCreate()
     {
