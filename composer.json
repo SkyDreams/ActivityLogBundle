@@ -1,5 +1,5 @@
 {
-    "name": "madmis/activity-log-bundle",
+    "name": "skydreams/activity-log-bundle",
     "type": "symfony-bundle",
     "description": "Activity log bundle - Extended doctrine loggable bundle",
     "keywords": ["bundle", "doctrine", "loggable", "activity", "symfony"],
@@ -12,7 +12,7 @@
     ],
     "license": "MIT",
     "require": {
-        "stof/doctrine-extensions-bundle": "^1.4"
+        "stof/doctrine-extensions-bundle": "^1.7"
     },
     "autoload": {
         "psr-4": {

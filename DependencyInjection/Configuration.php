@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         if (Kernel::VERSION_ID >= 40200) {
             $treeBuilder = new TreeBuilder('activity_log');

@@ -37,7 +37,7 @@ class LoggableListener extends BaseListener
      *
      * @throws \Gedmo\Exception\InvalidArgumentException Invalid username
      */
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         if ($username instanceof TokenInterface
             && $username->getUser() instanceof UserInterface
@@ -70,7 +70,7 @@ class LoggableListener extends BaseListener
      * @param LogEntryInterface $logEntry The LogEntry being persisted
      * @param object $object The object being Logged
      */
-    protected function prePersistLogEntry($logEntry, $object)
+    protected function prePersistLogEntry($logEntry, $object): void
     {
         if ($this->user instanceof UserInterface) {
             $logEntry->setUser($this->user);
