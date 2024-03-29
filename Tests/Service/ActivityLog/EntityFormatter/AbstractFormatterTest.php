@@ -21,19 +21,4 @@ class AbstractFormatterTest extends TestCase
         $result = $stub->normalizeValue('test', 1);
         $this->assertTrue(is_int($result));
     }
-
-    /**
-     * This test only for coverage - it's not test any real behaviors
-     */
-    public function testNormalizeValueByMethod()
-    {
-        $stub = $this->createMock(
-            'ActivityLogBundle\Service\ActivityLog\EntityFormatter\AbstractFormatter',
-        );
-        $stub->method('test')
-            ->willReturn('test');
-
-        $result = $stub->normalizeValue('test', 'test');
-        $this->assertEquals('test', $result);
-    }
 }
