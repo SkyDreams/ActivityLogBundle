@@ -2,6 +2,7 @@
 
 namespace Service\ActivityLog\EntityFormatter;
 
+use ActivityLogBundle\Service\ActivityLog\EntityFormatter\UniversalFormatter;
 use PHPUnit\Framework\TestCase;
 
 class AbstractFormatterTest extends TestCase
@@ -9,9 +10,7 @@ class AbstractFormatterTest extends TestCase
 
     public function testNormalizeValue()
     {
-        $stub = $this->createMock(
-            'ActivityLogBundle\Service\ActivityLog\EntityFormatter\AbstractFormatter'
-        );
+        $stub = new UniversalFormatter();
 
         $result = $stub->normalizeValue('test', ['key' => 'value']);
         $this->assertEquals('key: value;', $result);
@@ -28,14 +27,8 @@ class AbstractFormatterTest extends TestCase
      */
     public function testNormalizeValueByMethod()
     {
-        $stub = $this->getMockForAbstractClass(
+        $stub = $this->createMock(
             'ActivityLogBundle\Service\ActivityLog\EntityFormatter\AbstractFormatter',
-            [],
-            '',
-            true,
-            true,
-            true,
-            ['test']
         );
         $stub->method('test')
             ->willReturn('test');

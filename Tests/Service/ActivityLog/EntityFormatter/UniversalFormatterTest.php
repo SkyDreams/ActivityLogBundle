@@ -6,6 +6,7 @@ use ActivityLogBundle\Entity\LogEntry;
 use ActivityLogBundle\Listener\LoggableListener;
 use ActivityLogBundle\Service\ActivityLog\EntityFormatter\UniversalFormatter;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 
 class UniversalFormatterTest extends TestCase
@@ -18,7 +19,7 @@ class UniversalFormatterTest extends TestCase
         $entry->setData(['testProperty' => true]);
         $entry->setObjectClass('AppBundle\Entity\Project');
 
-        $formatter = new UniversalFormatter($this->getEmMock());
+        $formatter = new UniversalFormatter($this->createMock(EntityManagerInterface::class));
         $result = $formatter->format($entry);
 
         $this->assertTrue(is_array($result));
@@ -35,12 +36,12 @@ class UniversalFormatterTest extends TestCase
         $entry->setOldData(['testProperty' => false]);
         $entry->setObjectClass('AppBundle\Entity\Project');
 
-        $formatter = new UniversalFormatter($this->getEmMock());
+        $formatter = new UniversalFormatter($this->createMock(EntityManagerInterface::class));
         $result = $formatter->format($entry);
 
         $this->assertTrue(is_array($result));
         $this->assertArrayHasKey('message', $result);
-        $this->assertContains('The entity <b>name 1 (Project)</b> was updated.', $result['message']);
+        $this->assertStringContainsString('The entity <b>name 1 (Project)</b> was updated.', $result['message']);
     }
 
     public function testFormatRemove()
@@ -51,7 +52,7 @@ class UniversalFormatterTest extends TestCase
         $entry->setData(['testProperty' => true]);
         $entry->setObjectClass('AppBundle\Entity\Project');
 
-        $formatter = new UniversalFormatter($this->getEmMock());
+        $formatter = new UniversalFormatter($this->createMock(EntityManagerInterface::class));
         $result = $formatter->format($entry);
 
         $this->assertTrue(is_array($result));
@@ -68,18 +69,12 @@ class UniversalFormatterTest extends TestCase
         $entry->setData(['testProperty' => true]);
         $entry->setObjectClass('AppBundle\Entity\Project');
 
-        $formatter = new UniversalFormatter($this->getEmMock());
+        $formatter = new UniversalFormatter($this->createMock(EntityManagerInterface::class));
         $result = $formatter->format($entry);
 
         $this->assertTrue(is_array($result));
         $this->assertArrayHasKey('message', $result);
         $this->assertArrayHasKey('message', $result);
         $this->assertEquals('Undefined action: invalid action.', $result['message']);
-    }
-
-    public function getEmMock()
-    {
-        return $this->getMockBuilder('\Doctrine\ORM\EntityManager')
-            ->getMock();
     }
 }
