@@ -7,14 +7,16 @@ use ActivityLogBundle\Entity\LogEntry;
 use ActivityLogBundle\Service\ActivityLog\ActivityLogFormatter;
 use ActivityLogBundle\Service\ActivityLog\EntityFormatter\UniversalFormatter;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class ActivityLogFormatterTest extends TestCase
 {
     public function testFormat()
     {
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
-        $logger->method('warning')
-        ->willReturn($this->returnValue(null));
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger
+            ->expects($this->once())
+            ->method('warning');
 
         $factory = new ActivityLogFormatter($logger);
         $logEntry = new LogEntry();
@@ -37,10 +39,10 @@ class ActivityLogFormatterTest extends TestCase
 
     public function testCustomFormat()
     {
-        $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')
-            ->getMock();
-        $logger->method('warning')
-            ->willReturn($this->returnValue(null));
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger
+            ->expects($this->once())
+            ->method('warning');
 
         $factory = new ActivityLogFormatter($logger);
         $logEntry = new LogEntry();
