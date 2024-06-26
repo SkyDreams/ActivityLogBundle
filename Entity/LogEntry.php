@@ -3,6 +3,7 @@
 namespace ActivityLogBundle\Entity;
 
 use ActivityLogBundle\Entity\MappedSuperclass\AbstractLogEntry;
+use ActivityLogBundle\Repository\LogEntryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
