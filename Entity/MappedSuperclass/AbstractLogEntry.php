@@ -12,30 +12,35 @@ use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry as GedmoEntry;
 /**
  * @ORM\MappedSuperclass
  */
+#[ORM\MappedSuperclass]
 abstract class AbstractLogEntry extends GedmoEntry implements LogEntryInterface, ArrayableInterface
 {
     /**
      * @var string
      * @ORM\Column(name="parent_id", length=64, nullable=true)
      */
+    #[ORM\Column(name: 'parent_id', length: 64, nullable: true)]
     protected $parentId;
 
     /**
      * @var string
      * @ORM\Column(name="parent_class", type="string", length=255, nullable=true)
      */
+    #[ORM\Column(name: 'parent_class', type: 'string', length: 255, nullable: true)]
     protected $parentClass;
 
     /**
      * @var array
      * @ORM\Column(type="array", nullable=true)
      */
+    #[ORM\Column(type: 'array', nullable: true)]
     protected $oldData = null;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $name;
 
     /**
@@ -43,6 +48,8 @@ abstract class AbstractLogEntry extends GedmoEntry implements LogEntryInterface,
      * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: UserInterface::class)]
     protected $user;
 
     /**
