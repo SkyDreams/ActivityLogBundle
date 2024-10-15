@@ -22,7 +22,7 @@ class LogEntryRepository extends BaseRepository
      */
     public function getLogEntriesQuery($entity)
     {
-        $wrapped = new EntityWrapper($entity, $this->_em);
+        $wrapped = new EntityWrapper($entity, $this->getEntityManager());
         $objectClass = $wrapped->getMetadata()->name;
         $meta = $this->getClassMetadata();
         $dql = "SELECT log FROM {$meta->name} log";
@@ -31,7 +31,7 @@ class LogEntryRepository extends BaseRepository
         $dql .= " ORDER BY log.version DESC, log.loggedAt ASC";
 
         $objectId = $wrapped->getIdentifier();
-        $q = $this->_em->createQuery($dql);
+        $q = $this->getEntityManager()->createQuery($dql);
         $q->setParameters([
             'objectId' => $objectId,
             'objectClass' => $objectClass,
@@ -51,10 +51,10 @@ class LogEntryRepository extends BaseRepository
      */
     public function getLogEntriesQueryBuilder($entity)
     {
-        $wrapped = new EntityWrapper($entity, $this->_em);
+        $wrapped = new EntityWrapper($entity, $this->getEntityManager());
         $meta = $this->getClassMetadata();
 
-        $builder = $this->_em->createQueryBuilder();
+        $builder = $this->getEntityManager()->createQueryBuilder();
         $or = $builder->expr()->orX(
             'log.objectId = :objectId AND log.objectClass = :objectClass',
             'log.parentId = :parentId AND log.parentClass = :parentClass'
