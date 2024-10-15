@@ -54,25 +54,23 @@ class LogEntryRepository extends BaseRepository
         $wrapped = new EntityWrapper($entity, $this->getEntityManager());
         $meta = $this->getClassMetadata();
 
-        $builder = $this->getEntityManager()->createQueryBuilder();
-        $or = $builder->expr()->orX(
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $or = $qb->expr()->orX(
             'log.objectId = :objectId AND log.objectClass = :objectClass',
             'log.parentId = :parentId AND log.parentClass = :parentClass'
         );
-        $builder->select('log')
+        $qb->select('log')
             ->from($meta->name, 'log')
             ->andWhere($or)
             ->addOrderBy('log.loggedAt', 'DESC');
 
         $objectClass = $wrapped->getMetadata()->name;
         $objectId = $wrapped->getIdentifier();
-        $builder->setParameters([
-            'objectId' => $objectId,
-            'objectClass' => $objectClass,
-            'parentId' => $objectId,
-            'parentClass' => $objectClass,
-        ]);
+        $qb->setParameter('objectId', $objectId)
+            ->setParameter('objectClass', $objectClass)
+            ->setParameter('parentId', $objectId)
+            ->setParameter('parentClass', $objectClass);
 
-        return $builder;
+        return $qb;
     }
 }
