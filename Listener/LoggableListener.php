@@ -88,7 +88,7 @@ class LoggableListener extends BaseListener
             $uow = $om->getUnitOfWork();
             $wrapped = AbstractWrapper::wrap($object, $om);
             $meta = $wrapped->getMetadata();
-            $config = $this->getConfiguration($om, $meta->name);
+            $config = $this->getConfiguration($om, $meta->getName());
 
             if ($logEntry->getOldData() === null) {
                 // save relations to parent entity
@@ -96,7 +96,7 @@ class LoggableListener extends BaseListener
                     $parent = $object->getParentEntity();
                     $parentMeta = AbstractWrapper::wrap($parent, $om)->getMetadata();
                     $logEntry->setParentId($parent->getId());
-                    $logEntry->setParentClass($parentMeta->name);
+                    $logEntry->setParentClass($parentMeta->getName());
                 }
 
                 // don't save old data for new entity,
