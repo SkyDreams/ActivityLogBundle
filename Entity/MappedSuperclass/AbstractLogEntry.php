@@ -9,10 +9,6 @@ use ActivityLogBundle\Listener\LoggableListener;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry as GedmoEntry;
 
-/**
- * @ORM\MappedSuperclass
- */
-#[ORM\MappedSuperclass]
 abstract class AbstractLogEntry extends GedmoEntry implements LogEntryInterface, ArrayableInterface
 {
     /**
