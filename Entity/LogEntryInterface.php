@@ -61,16 +61,6 @@ interface LogEntryInterface
     public function setName($name);
 
     /**
-     * @return UserInterface|null
-     */
-    public function getUser();
-
-    /**
-     * @param UserInterface|null $user
-     */
-    public function setUser($user);
-
-    /**
      * Is action CREATE
      * @return bool
      */
