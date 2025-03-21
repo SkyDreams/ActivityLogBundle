@@ -39,7 +39,10 @@ abstract class AbstractLogEntry extends GedmoEntry implements LogEntryInterface,
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $name;
 
-    protected UserInterface|null $user;
+    /**
+     * @var UserInterface|null
+     */
+    protected $user;
 
     /**
      * @return string
