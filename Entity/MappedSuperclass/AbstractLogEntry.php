@@ -43,14 +43,7 @@ abstract class AbstractLogEntry extends GedmoEntry implements LogEntryInterface,
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected $name;
 
-    /**
-     * @var UserInterface
-     * @ORM\ManyToOne(targetEntity="Symfony\Component\Security\Core\User\UserInterface")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
-     */
-    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\ManyToOne(targetEntity: UserInterface::class)]
-    protected $user;
+    protected UserInterface|null $user;
 
     /**
      * @return string
