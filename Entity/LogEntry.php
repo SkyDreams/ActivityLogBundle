@@ -6,6 +6,7 @@ use ActivityLogBundle\Entity\Interfaces\ArrayableInterface;
 use ActivityLogBundle\Listener\LoggableListener;
 use ActivityLogBundle\Repository\LogEntryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry as GedmoEntry;
 
 #[ORM\Table(name: 'log_entries')]
 #[ORM\Index(name: 'log_class_lookup_idx', columns: ['object_class'])]
