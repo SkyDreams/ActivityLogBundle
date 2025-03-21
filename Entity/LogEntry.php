@@ -15,7 +15,7 @@ use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry as GedmoEntry;
 #[ORM\Index(name: 'log_version_lookup_idx', columns: ['object_id', 'object_class', 'version'])]
 #[ORM\Index(name: 'log_entries_with_parent_lookup_idx', columns: ['object_id', 'object_class', 'parent_id', 'parent_class', 'version'])]
 #[ORM\Entity(repositoryClass: LogEntryRepository::class)]
-class LogEntry extends GedmoEntry implements ArrayableInterface
+abstract class LogEntry extends GedmoEntry implements LogEntryInterface, ArrayableInterface
 {
     /**
      * @var string
