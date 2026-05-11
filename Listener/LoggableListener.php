@@ -72,6 +72,13 @@ class LoggableListener extends BaseListener
      */
     protected function prePersistLogEntry($logEntry, $object): void
     {
+        if ($this->user === null && $this->actorProvider !== null) {
+            $actor = $this->actorProvider->getActor();
+            if ($actor instanceof UserInterface) {
+                $this->user = $actor;
+            }
+        }
+
         if ($this->user instanceof UserInterface) {
             $logEntry->setUser($this->user);
         }
