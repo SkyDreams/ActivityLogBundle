@@ -10,7 +10,6 @@ use Gedmo\Tool\Wrapper\AbstractWrapper;
 use ActivityLogBundle\Entity\Interfaces\LoggableChildInterface;
 use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 use ActivityLogBundle\Entity\LogEntryInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Persistence\Proxy;
 
@@ -24,29 +23,6 @@ class LoggableListener extends BaseListener
      * @var AdapterInterface
      */
     protected $eventAdapter;
-
-    /**
-     * @var UserInterface
-     */
-    protected $user;
-
-    /**
-     * Set username for identification
-     *
-     * @param mixed $username
-     *
-     * @throws \Gedmo\Exception\InvalidArgumentException Invalid username
-     */
-    public function setUsername($username): void
-    {
-        if ($username instanceof TokenInterface
-            && $username->getUser() instanceof UserInterface
-        ) {
-            $this->user = $username->getUser();
-        }
-
-        parent::setUsername($username);
-    }
 
     /**
      * Looks for loggable objects being inserted or updated
@@ -72,8 +48,9 @@ class LoggableListener extends BaseListener
      */
     protected function prePersistLogEntry($logEntry, $object): void
     {
-        if ($this->user instanceof UserInterface) {
-            $logEntry->setUser($this->user);
+        $user = $this->actorProvider?->getActor();
+        if ($user instanceof UserInterface) {
+            $logEntry->setUser($user);
         }
 
         if ($object instanceof StringableInterface) {
