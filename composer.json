@@ -19,6 +19,11 @@
             "ActivityLogBundle\\": ""
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "ActivityLogBundle\\Tests\\": "Tests/"
+        }
+    },
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
@@ -26,6 +31,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.3"
+        "phpunit/phpunit": "^11.0"
     }
 }
